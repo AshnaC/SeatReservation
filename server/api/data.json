@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "name": "Mills",
+      "seats": [
+        "E4"
+      ]
+    },
+    {
+      "name": "Lil",
+      "seats": [
+        "E5",
+        "F5"
+      ]
+    },
+    {
+      "name": "q",
+      "seats": [
+        "F4",
+        "F3"
+      ]
+    },
+    {
+      "name": "Bliss",
+      "seats": [
+        "F2"
+      ]
+    },
+    {
+      "name": "wwww",
+      "seats": [
+        "H5"
+      ]
+    },
+    {
+      "name": "Ashna C ",
+      "seats": [
+        "G7",
+        "G8",
+        "G9"
+      ]
+    },
+    {
+      "name": "11",
+      "seats": [
+        "G10"
+      ]
+    }
+  ]
+}
