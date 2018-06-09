@@ -1,44 +1,4 @@
 {
   "users": [
-    {
-      "name": "ddd",
-      "seats": [
-        "F10"
-      ]
-    },
-    {
-      "name": "Homeq",
-      "seats": [
-        "J8"
-      ]
-    },
-    {
-      "name": "sss",
-      "seats": [
-        "J11"
-      ]
-    },
-    {
-      "name": "dd",
-      "seats": [
-        "F5",
-        "F4"
-      ]
-    },
-    {
-      "name": "ssq",
-      "seats": [
-        "H12"
-      ]
-    },
-    {
-      "name": "gff",
-      "seats": [
-        "C6",
-        "C7",
-        "C8",
-        "C9"
-      ]
-    }
   ]
 }
