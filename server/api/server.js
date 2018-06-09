@@ -9,7 +9,6 @@ app.use(
     extended: false
   })
 );
-// app.use(bodyParser.json());
 
 app.get("/api/getReservationList", (req, res) => {
   fs.readFile(__dirname + "/" + "data.json", (er, data) => {

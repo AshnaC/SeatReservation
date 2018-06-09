@@ -5,13 +5,12 @@ export const StyledTable = styled.div`
   margin: auto;
   border-radius: 6px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.07);
-  margin-bottom: 50px;
 `;
 
 export const TableHeader = styled.div`
   width: 100%;
   text-align: center;
-  padding: 10px;
+  padding: 15px 10px 0;
   background-color: #f1f1f1;
 `;
 
@@ -27,7 +26,7 @@ export const TableHeaderCol = styled.div`
   font-weight: bold;
   font-size: 14px;
   text-align: center;
-  padding: 10px;
+  padding: 10px 10px 0;
 `;
 export const TableRow = styled.div`
   width: 100%;
@@ -46,5 +45,8 @@ export const TableColoumn = styled.div`
   }
   font-size: 14px;
   text-align: center;
-  padding: 10px;
+  padding: 10px 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

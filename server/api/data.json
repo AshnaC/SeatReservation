@@ -1,49 +1,28 @@
 {
   "users": [
     {
-      "name": "Mills",
+      "name": "ddd",
       "seats": [
-        "E4"
+        "F10"
       ]
     },
     {
-      "name": "Lil",
+      "name": "Homeq",
       "seats": [
-        "E5",
-        "F5"
+        "J8"
       ]
     },
     {
-      "name": "q",
+      "name": "sss",
       "seats": [
-        "F4",
-        "F3"
+        "J11"
       ]
     },
     {
-      "name": "Bliss",
+      "name": "dd",
       "seats": [
-        "F2"
-      ]
-    },
-    {
-      "name": "wwww",
-      "seats": [
-        "H5"
-      ]
-    },
-    {
-      "name": "Ashna C ",
-      "seats": [
-        "G7",
-        "G8",
-        "G9"
-      ]
-    },
-    {
-      "name": "11",
-      "seats": [
-        "G10"
+        "F5",
+        "F4"
       ]
     }
   ]

@@ -18,6 +18,9 @@ import {
   ColNumber,
   SeatWrapper,
   PreloaderWrapper,
+  SeatLabelWrapper,
+  SeatLabel,
+  SeatType,
 } from "./styles";
 import Button from "../Button";
 import Preloader from "../LoadingIndicator";
@@ -66,9 +69,9 @@ class SeatSelector extends React.Component {
     return (
       <Theater>
         <ContentWrapper>
-          <Screen />
+          <Screen>SCREEN</Screen>
           <SeatLayout>
-            {this.props.enabledPreloader && (
+            {this.props.enablePreloader && (
               <PreloaderWrapper>
                 <Preloader />
               </PreloaderWrapper>
@@ -83,19 +86,17 @@ class SeatSelector extends React.Component {
                       (this.props.userDetails.seatsCount >
                         this.state.selectedSeats.length ||
                         this.state.selectedSeats.includes(seatId)) &&
-                      !isReserved;
+                      !isReserved && !this.props.enablePreloader;
                     return (
                       <SeatWrapper key={col}>
                         {row === "A" && <ColNumber>{col}</ColNumber>}
-                        {col === "1" && <RowNumber>{row}</RowNumber>}
+                        {col === 1 && <RowNumber>{row}</RowNumber>}
                         <Seat
                           index={col}
                           selectable={isSelectable}
                           reserved={isReserved}
                           selected={this.state.selectedSeats.includes(seatId)}
-                          onClick={
-                            isSelectable && this.onSeatSelection(row, col)
-                          }
+                          onClick={isSelectable && this.onSeatSelection(row, col)}
                         />
                       </SeatWrapper>
                     );
@@ -109,10 +110,24 @@ class SeatSelector extends React.Component {
               onClick={allowBooking && this.addReservation}
               leftMargin="50px"
             />
-            <Button onClick={this.onBack} label="Back" leftMargin="100px" />
+            <SeatLabelWrapper>
+              <SeatLabel>
+                <Seat selected/>
+                <SeatType>Selected</SeatType>
+              </SeatLabel>
+              <SeatLabel>
+                <Seat reserved/>
+                <SeatType>Reserved</SeatType>
+              </SeatLabel>
+              <SeatLabel>
+                <Seat selectable/>
+                <SeatType>Available</SeatType>
+              </SeatLabel>
+            </SeatLabelWrapper>
+            <Button onClick={this.onBack} label="Back" leftMargin="25px" />            
           </SeatLayout>
         </ContentWrapper>
-        <CustomerList reserveList={this.props.reserveList} />
+        {this.props.reserveList.length && <CustomerList reserveList={this.props.reserveList} />}
       </Theater>
     );
   }
@@ -122,8 +137,8 @@ SeatSelector.propTypes = {
   reserveList: PropTypes.array,
   bookedSeats: PropTypes.array,
   addReservation: PropTypes.func,
-  enabledPreloader: PropTypes.bool,
-  seatBooked: PropTypes.array,
+  enablePreloader: PropTypes.bool,
+  seatBooked: PropTypes.bool,
   noOfCols: PropTypes.number,
   slectedSeats: PropTypes.array,
   noOfRows: PropTypes.number,

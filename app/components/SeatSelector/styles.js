@@ -8,6 +8,7 @@ export const Theater = styled.div`
   min-height: 100%;
   min-width: 100%;
   background-image: url(${myImage});
+  padding-bottom: 50px;
 `;
 
 export const ContentWrapper = styled.div`
@@ -29,11 +30,13 @@ export const Seat = styled.div`
 `;
 
 export const Screen = styled.div`
-  height: 30px;
+  line-height: 30px;
+  text-align: center;
   width: 700px;
   background-color: #106fb1;
   margin-bottom: 50px;
   margin: auto;
+  color: #FFF;
 `;
 
 export const SeatLayout = styled.div`
@@ -45,6 +48,9 @@ export const SeatLayout = styled.div`
 `;
 export const SeatRow = styled.div`
   text-align: center;
+  &:last-child {
+    padding-bottom:20px;
+  }
 `;
 
 export const RowNumber = styled.div`
@@ -75,4 +81,22 @@ export const PreloaderWrapper = styled.div`
   position: absolute;
   top: 35%;
   left: 33%;
+`;
+
+export const   SeatLabelWrapper= styled.div`
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 70px;`;
+
+export const   SeatLabel= styled.div`
+ display: inline-block;
+  padding-right: 10px;
+`;
+
+export const   SeatType= styled.div`
+  font-size: 14px;
+  color: #FFF;
+  font-weight:bold;
+  position: relative;
+  right: 5px;
 `;

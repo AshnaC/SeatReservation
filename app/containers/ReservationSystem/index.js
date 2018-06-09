@@ -40,20 +40,18 @@ export class ReservationSystem extends React.Component {
   }
 
   render() {
-    return this.props.loadingFailed ? (
-      <ErrorPage />
-    ) : (
+    return (this.props.loadingFailed ? 
+      <ErrorPage /> : 
       <SystemLayout
         reserveList={this.props.reservationList}
         bookedSeats={this.props.bookedSeats}
         addReservation={this.addReservation}
-        enabledPreloader={this.props.loading}
+        enablePreloader={this.props.loading}
         seatBooked={this.props.seatBooked}
         resetBookedData={this.resetBookedData}
         noOfCols={this.noOfCols}
         noOfRows={this.noOfRows}
-      />
-    );
+      />)
   }
 }
 

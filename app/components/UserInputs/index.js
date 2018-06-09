@@ -53,7 +53,8 @@ class UserInputs extends React.PureComponent {
       error.customerName = validation.name;
       isInvalid = true;
     }
-    if (!this.state.seatsCount || isNaN(this.state.seatsCount)) {
+    if (!this.state.seatsCount || isNaN(this.state.seatsCount || 
+        !parseInt(this.state.seatsCount))) {
       error.seatsCount = validation.seats.invalid;
       isInvalid = true;
     } else if (parseInt(this.state.seatsCount) > this.props.seatsLeft) {
@@ -71,38 +72,35 @@ class UserInputs extends React.PureComponent {
     return (
       <BackDrop>
         <ContentWrapper>
-          {this.props.enabledPreloader && (
-            <PreloaderWrapper>
-              <Preloader />
-            </PreloaderWrapper>
-          )}
+          {this.props.enablePreloader && 
+            (<PreloaderWrapper><Preloader /></PreloaderWrapper>)}
           <InputWrapper>
             <Label>Name</Label>
             <Input
+              large            
               type="text"
-              onChange={this.handleInputChange}
               name="customerName"
+              onChange={this.handleInputChange}              
               error={error && error.customerName}
-              large
             />
             {error && error.customerName && <Error>{error.customerName}</Error>}
           </InputWrapper>
           <InputWrapper>
             <Label>Seats</Label>
             <Input
+              medium            
               type="text"
+              name="seatsCount"              
               onChange={this.handleInputChange}
-              name="seatsCount"
               error={this.state.error && this.state.error.seatsCount}
-              medium
             />
             {error && error.seatsCount && <Error>{error.seatsCount}</Error>}
           </InputWrapper>
           <Button
             enabled
-            onClick={this.onStartSlection}
             leftMargin="50px"
             label="Start Selecting"
+            onClick={this.onStartSlection}            
           />
         </ContentWrapper>
       </BackDrop>
@@ -111,7 +109,7 @@ class UserInputs extends React.PureComponent {
 }
 
 UserInputs.propTypes = {
-  enabledPreloader: PropTypes.bool,
+  enablePreloader: PropTypes.bool,
   seatsLeft: PropTypes.number,
   startSlection: PropTypes.func,
 };

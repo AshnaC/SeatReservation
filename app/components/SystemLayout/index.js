@@ -33,7 +33,7 @@ class SystemLayout extends React.Component {
           bookedSeats={this.props.bookedSeats}
           userDetails={this.state.userDetails}
           addReservation={this.props.addReservation}
-          enabledPreloader={this.props.enabledPreloader}
+          enablePreloader={this.props.enablePreloader}
           seatBooked={this.props.seatBooked}
           loadInitialPage={this.loadInitialPage}
           noOfCols={this.props.noOfCols}
@@ -47,7 +47,7 @@ class SystemLayout extends React.Component {
     return (
       <UserInputs
         startSlection={this.onStartSelection}
-        enabledPreloader={this.props.enabledPreloader}
+        enablePreloader={this.props.enablePreloader}
         seatsLeft={seatsLeft}
       />
     );
@@ -67,7 +67,7 @@ SystemLayout.propTypes = {
   reserveList: PropTypes.array,
   bookedSeats: PropTypes.array,
   addReservation: PropTypes.func,
-  enabledPreloader: PropTypes.bool,
+  enablePreloader: PropTypes.bool,
   seatBooked: PropTypes.bool,
   resetBookedData: PropTypes.func,
   noOfCols: PropTypes.number,

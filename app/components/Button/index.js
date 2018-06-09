@@ -33,7 +33,7 @@ class Button extends React.Component {
 }
 
 Button.propTypes = {
-  onClick: PropTypes.func,
+  onClick: PropTypes.any,
   disabled: PropTypes.bool,
   leftMargin: PropTypes.string,
   label: PropTypes.string,
