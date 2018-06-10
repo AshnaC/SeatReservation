@@ -127,7 +127,7 @@ class SeatSelector extends React.Component {
             <Button onClick={this.onBack} label="Back" leftMargin="25px" />            
           </SeatLayout>
         </ContentWrapper>
-        {this.props.reserveList.length && <CustomerList reserveList={this.props.reserveList} />}
+        {this.props.reserveList.length && <CustomerList reserveList={this.props.reserveList} /> || ''}
       </Theater>
     );
   }
