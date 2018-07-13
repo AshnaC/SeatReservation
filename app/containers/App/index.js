@@ -14,13 +14,13 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import ReservationSystem from 'containers/ReservationSystem';
+import FundContainer from '../FundContainer';
 
 export default function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="*" component={ReservationSystem} />
+        <Route exact path="*" component={FundContainer} />
       </Switch>
     </div>
   );
