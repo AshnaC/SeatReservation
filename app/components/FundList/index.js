@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import StarRatingComponent from 'react-star-rating-component';
 
 import FundDetails from '../FundDetails';
-import myImage from '../../images/addToCompare.jpg';
+import addToCompare from '../../images/addToCompare.jpg';
 
 import {
   AddToCompareIcon,
@@ -42,20 +42,17 @@ class FundList extends React.PureComponent {
                 </FundName>
                 <RatingContainer>
                   <StarRatingComponent
-                    editing={false}
+                    name="rate"
                     starCount={5}
-                    value={fund.rating}
-                  />
+                    editing={false}                    
+                    value={fund.rating} />
                 </RatingContainer>
-                <AddToCompareIcon
-                  src={myImage}
-                  onClick={this.addToCompare(fund)} />
+                <AddToCompareIcon src={addToCompare} onClick={this.addToCompare(fund)} />
               </FundInfo>
               {this.props.selectedFundId === fund.details_id && this.props.fundDetailsList[fund.details_id] &&
                 <FundDetails
-                  details={this.props.fundDetailsList[fund.details_id]}
-                  fund={fund}
-                />}
+                  fund={fund} 
+                  details={this.props.fundDetailsList[fund.details_id]} />}
             </ListItem>
           );
         })}

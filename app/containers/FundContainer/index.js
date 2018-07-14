@@ -17,12 +17,14 @@ import reducer from './reducer';
 import saga from './saga';
 import { getFundList, getFundDetails, getFundDetailsList } from './actions';
 
-import FundExplorer from '../../components//FundExplorer';
+import FundExplorer from '../../components/FundExplorer';
+import ErrorPage from '../../components/ErrorPage';
 
 export class FundContainer extends React.Component {
   render() {
-    console.log('main', this.props);
     return (
+      this.props.error ?
+      <ErrorPage/> :
       <FundExplorer
         fundList={this.props.fundList}
         loadCompare={this.props.loadCompare}
@@ -38,15 +40,15 @@ export class FundContainer extends React.Component {
 }
 
 FundContainer.propTypes = {
-  getFundList: PropTypes.func.isRequired,
+  error: PropTypes.bool,
   fundList: PropTypes.object,
+  loadCompare: PropTypes.bool,
   fundListFetched: PropTypes.bool,
+  fecthingDetails: PropTypes.bool,
+  fundDetailsList: PropTypes.object,
   getFundDetailsList: PropTypes.func,
+  getFundList: PropTypes.func.isRequired,  
 };
-
-// const mapStateToProps = createStructuredSelector({
-//   fundcontainer: makeSelectFundContainer(),
-// });
 
 const mapStateToProps = makeSelectFundContainer();
 

@@ -1,5 +1,5 @@
 {
-  "name": "seat-reservation",
+  "name": "mf-explorer",
   "engines": {
     "npm": ">=3",
     "node": ">=5"

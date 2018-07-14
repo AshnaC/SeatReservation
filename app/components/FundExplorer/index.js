@@ -16,13 +16,13 @@ import LoadingIndicator from '../LoadingIndicator';
 import {
   SearchResultDropDown,
   CompareListWrapper,
-  SpinnerContainer,
   SearchInputWrapper,
+  SpinnerContainer,  
   ContentContainer,
   ContentWrapper,
+  CompareItem,
   SearchItem,
   FundName,
-  CompareItem,
   CloseLink,
   BackDrop,
   ShowMore,
@@ -34,13 +34,14 @@ class FundExplorer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { compareList: [], showSearchDropDown: true };
+    this.onInputClick = this.onInputClick.bind(this);    
     this.addToCompare = this.addToCompare.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.disableSearchDropDown = this.disableSearchDropDown.bind(this);
-    this.searchFunds = debounce(this.onSearchInputChange, 1000);
     this.onFundsCompare = this.onFundsCompare.bind(this);
     this.getFundDetails = this.getFundDetails.bind(this);
+    this.searchFunds = debounce(this.onSearchInputChange, 1000);    
     this.onDisableComparePage = this.onDisableComparePage.bind(this);
+    this.disableSearchDropDown = this.disableSearchDropDown.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -52,10 +53,9 @@ class FundExplorer extends React.Component {
     }
   }
 
-  onSearchInputChange(value) {
-    this.props.getFundList({ search: value });
-    // this.setState({ value, showResult: false });
-    this.setState({ value });
+  onSearchInputChange(searchParam) {
+    this.props.getFundList({ search: searchParam });
+    this.setState({ searchParam });
   }
 
   onDisableComparePage() {
@@ -79,9 +79,14 @@ class FundExplorer extends React.Component {
   }
 
   getFundDetails(detailsId) {
-    this.setState({ selectedFundId: detailsId });
-    if (!this.props.fundDetailsList[detailsId]) {
-      this.props.getFundDetails(detailsId);
+    if (detailsId === this.state.selectedFundId) {
+      this.setState({ selectedFundId: '' }); 
+    }
+    else {
+      this.setState({ selectedFundId: detailsId });
+      if (!this.props.fundDetailsList[detailsId]) {
+        this.props.getFundDetails(detailsId);
+      }
     }
   }
 
@@ -92,27 +97,32 @@ class FundExplorer extends React.Component {
   handleSearch(event) {
     const value = event.target.value;
     if (value && value.length > 2 && value !== this.state.value) {
-      // this.setState({ showSearchDropDown: false });
       this.searchFunds(value);
     }
     // to handle 3 char when same data is entered after dropdown disabled
-    if (value === this.state.value) {
+    if (value === this.state.searchParam) {
+      this.setState({ showSearchDropDown: true });
+    }
+  }
+
+  onInputClick() {
+    if( this.props.fundList && this.props.fundList.search_results ){
       this.setState({ showSearchDropDown: true });
     }
   }
 
   showResults = (detailsId) => () => {
-    const displayList = this.props.fundList && (detailsId ?
-      this.props.fundList.search_results.filter((fund) => fund.details_id === detailsId) :
-      this.props.fundList.search_results);
+    let displayList = undefined;
+    if(detailsId) {
+      displayList = this.props.fundList.search_results.filter((fund) => fund.details_id === detailsId);
+      this.getFundDetails(detailsId);
+    }
+    else{
+      displayList = this.props.fundList.search_results;
+    }
     this.setState({ showResult: true, displayList, showSearchDropDown: false });
   }
-
-  // showAllResults() {
-  //   const displayList = this.props.fundList && this.props.fundList.search_results;
-  //   this.setState({ showResult: true, displayList });
-  // }
-
+  
   addToCompare(fund) {
     this.setState((prevState) => {
       const compareList = [...prevState.compareList];
@@ -132,44 +142,35 @@ class FundExplorer extends React.Component {
   }
 
   render() {
-    console.log('props', this.props);
-    console.log('state', this.state);
     const funds = (this.props.fundList && this.props.fundList.search_results);
     return (
       <ContentContainer>
-        {this.props.fecthingDetails && <SpinnerContainer><LoadingIndicator /></SpinnerContainer>}
+        {this.props.fecthingDetails && 
+        <SpinnerContainer><LoadingIndicator /></SpinnerContainer>}
         <ContentWrapper>
           <SearchInputWrapper>
-            <Input large onKeyUp={this.handleSearch} />
-            <Button
-              onClick={this.showResults()}
-              leftMargin="20px"
-              label={'Search'} />
+            <Input large onKeyUp={this.handleSearch} onClick ={this.onInputClick}/>
             {funds && this.state.showSearchDropDown &&
               <SearchResultDropDown>
                 <BackDrop onClick={this.disableSearchDropDown} />
-                {funds.length === 0 ?
-                  <NoData>No matching results</NoData> :
+                {funds.length === 0 ? <NoData>No matching results</NoData> :
                   <div>
                     {funds.slice(0, 9).map((fund) => {
                       return (
-                        <SearchItem key={fund.details_id} onClick={this.showResults(fund.details_id, true)}>
+                        <SearchItem key={fund.details_id} onClick={this.showResults(fund.details_id)}>
                           {fund.name}
-                        </SearchItem>);
-                    })}
-                    {funds.length > 10 && <ShowMore onClick={this.showResults()}>Show More</ShowMore>}
+                        </SearchItem>);})}
+                    {funds.length > 0 && <ShowMore onClick={this.showResults()}>Show More</ShowMore>}
                   </div>}
               </SearchResultDropDown>}
           </SearchInputWrapper>
-          {this.state.showResult && this.state.displayList &&
+          {this.state.showResult && this.state.displayList && !this.state.loadComparePage &&
             <FundList
               fundList={this.state.displayList}
               selectedFundId={this.state.selectedFundId}
               addToCompare={this.addToCompare}
               getFundDetails={this.getFundDetails}
-              fundDetailsList={this.props.fundDetailsList}
-            />
-          }
+              fundDetailsList={this.props.fundDetailsList} />}
           {this.state.loadComparePage &&
             <FundCompare
               compareList={this.state.compareList}
@@ -181,18 +182,11 @@ class FundExplorer extends React.Component {
             {this.state.compareList.map((fundToCompare) => {
               return (
                 <CompareItem key={fundToCompare.details_id}>
-                  <FundName>
-                    {fundToCompare.name}
-                  </FundName>
-                  <CloseLink onClick={this.removeFromCompare(fundToCompare)}> &times;</CloseLink>
-                </CompareItem>);
-            })}
+                  <FundName>{fundToCompare.name}</FundName>
+                  <CloseLink onClick={this.removeFromCompare(fundToCompare)}>&times;</CloseLink>
+                </CompareItem>);})}
             {this.state.compareList.length > 1 &&
-              <ShowMore
-                compare
-                onClick={this.onFundsCompare}>
-                Compare
-            </ShowMore>}
+              <ShowMore compare onClick={this.onFundsCompare}>Compare</ShowMore>}
           </CompareListWrapper>}
       </ContentContainer>
     );
@@ -200,12 +194,12 @@ class FundExplorer extends React.Component {
 }
 
 FundExplorer.propTypes = {
-  fundList: PropTypes.array,
+  fundList: PropTypes.object,
   fundListFetched: PropTypes.bool,
   fundDetailsList: PropTypes.object,
   getFundDetails: PropTypes.func,
   getFundList: PropTypes.func,
-  getFundDetailsList: PropTypes.array,
+  getFundDetailsList: PropTypes.func,
   fecthingDetails: PropTypes.bool,
 };
 

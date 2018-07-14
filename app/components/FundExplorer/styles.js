@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import myImage from '../../images/background.jpg';
 
 export const CompareListWrapper = styled.div`
   display: inline-block;
   width: 300px;
   padding: 10px;
-  margin-top: 142px;
+  margin-top: 146px;
 `;
 
 export const CompareItem = styled.div`
@@ -21,14 +20,14 @@ export const CompareItem = styled.div`
 
 export const Input = styled.input`
   height: 40px;
-  width: ${(props) =>
-    (props.large && '300px') ||
-    (props.medium && '150px') ||
-    (props.small && '75px')};
-  border: ${(props) => (props.error ? '2px solid #F0E68C' : '1px solid #106fb1')};
+  width: 500px;
+  border: 1px solid #106fb1;
   border-radius: 6px;
   padding: 10px;
+  background: #FFFF;
   font-size: 14px;
+  color: #666;
+  font-weight: bold;
 `;
 
 export const SearchInputWrapper = styled.div`
@@ -40,7 +39,6 @@ export const SearchInputWrapper = styled.div`
 `;
 
 export const NoData = styled.div`
-  width: 280px;
   color: #bab8b8;
   font-size: 14px;
   text-align:center;
@@ -52,12 +50,14 @@ export const SearchResultDropDown = styled.div`
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #c8c8c8;
   padding: 10px;
-  font-size :14px;
+  font-size :12px;
   font-weight: bold;
+  text-align: left;
   color : #666;
   background-color: #FFF;
   z-index: 2;
   margin-top :10px;
+  width: 500px;
 `;
 
 export const ShowMore = styled.div`
@@ -76,12 +76,12 @@ export const ShowMore = styled.div`
 
 export const SearchItem = styled.div`
   padding: 10px 0;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: underline;
-  color: #106fb1;
+  // color: #106fb1;
   cursor: pointer;
   border-bottom: 1px solid #e4e4e4;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const BackDrop = styled.div`
@@ -96,7 +96,7 @@ export const BackDrop = styled.div`
 
 export const ContentContainer = styled.div`
   padding:10px;
-  margin-right: 10px;
+  position: relative;
 `;
 
 export const ContentWrapper = styled.div`

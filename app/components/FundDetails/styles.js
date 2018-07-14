@@ -8,11 +8,13 @@ export const Header = styled.div`
   font-size: 14px;
   padding: 0 10px;
   width: 200px;
+  margin-bottom: 10px;
 `;
 
 export const PropertyWrapper = styled.div`
-  border: 1px solid #d7eaf7;
-  font-size:14px;
+  border-bottom: 1px solid #d7eaf7;
+  font-size: 13px;
+  padding: ${(props) => (props.header ? '5px' : '2px 5px;')};
 `;
 
 export const Name = styled.div`
@@ -30,3 +32,7 @@ export const Value = styled.div`
 export const DetailItem = styled.div`
   padding:10px 0;
 `;
+
+export const DetailsWrapper = styled.div`
+  padding: 10px;
+`

@@ -2,26 +2,31 @@
  *
  * App.js
  *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
  */
 
 import React from 'react';
+import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
 import FundContainer from '../FundContainer';
+import background from '../../images/dark.jpg';
+
+const AppWrapper = styled.div`
+  min-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-image: url(${background});
+  background-size: 100% 100%;
+`;
 
 export default function App() {
   return (
-    <div>
+    <AppWrapper>
       <Switch>
         <Route exact path="*" component={FundContainer} />
       </Switch>
-    </div>
+    </AppWrapper>
   );
 }

@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import myImage from '../../images/background.jpg';
 
 export const CompareListWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%;
   left: 0;
-  min-height: 100%;
+  min-height: 100vh;
   z-index: 3;
   background: #FFF;
   padding:10px;
@@ -33,6 +32,7 @@ export const TableRow = styled.tr`
 
 export const TableCol = styled.td`
   padding: 10px 5px;
+  width: ${props => props.name? '20%': 'auto'};
 `;
 
 export const TableHeader = styled.tr`
@@ -46,6 +46,7 @@ export const BackLink = styled.div`
   font-size: 14px;
   color: #0066a8;
   padding: 10px;
+  width: 100px;
   cursor: pointer;
    &:hover {
     font-weight: bold;

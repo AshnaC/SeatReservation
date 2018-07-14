@@ -6,6 +6,7 @@
 
 import {
   GET_FUND_LIST,
+  LOADING_FAILED,
   FUND_LIST_FETCHED,
   GET_FUND_DETAILS,
   FUND_DETAILS_FETCHED,
@@ -46,4 +47,11 @@ export function getFundDetailsList(detailsIds) {
     type: GET_FUND_DETAILS_LIST,
     detailsIds,
   };
+}
+
+export function loadingFailed(err) {
+  return {
+    type: LOADING_FAILED,
+    err
+  }
 }

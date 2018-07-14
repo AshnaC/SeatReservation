@@ -6,10 +6,11 @@
 
 import { fromJS } from 'immutable';
 import {
+  GET_FUND_LIST,  
+  LOADING_FAILED,
   GET_FUND_DETAILS,
   FUND_LIST_FETCHED,
   FUND_DETAILS_FETCHED,
-  GET_FUND_LIST,
   GET_FUND_DETAILS_LIST,
 } from './constants';
 
@@ -21,6 +22,8 @@ function fundContainerReducer(state = initialState, action) {
   switch (action.type) {
     case GET_FUND_LIST:
       return state.set('fundListFetched', false);
+    case LOADING_FAILED:
+      return state.set('error', true);
     case FUND_LIST_FETCHED:
       return state.set('fundList', action.fundList.data)
         .set('fundListFetched', true);
