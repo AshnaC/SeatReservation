@@ -5,7 +5,8 @@
  */
 
 import React from "react";
-import { ErrorMessage, BackDrop } from "./styles";
+import { BackDrop } from "../UserInputs/styles";
+import { ErrorMessage } from "./styles";
 
 function ErrorPage() {
   return (
